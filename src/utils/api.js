@@ -1,6 +1,6 @@
 import {API_AUTH, API_URL} from "./constants"
 
-export async function getRealState() {
+export async function getRealState() { 
     const res = await fetch(API_URL + "real-estates", {
         "headers": {
             "authorization": API_AUTH,
@@ -13,7 +13,7 @@ export async function getRealState() {
         const _listaRealState = await res.json()
         return _listaRealState
     }
-    return []
+    return undefined
 }
 
 export async function deleteRealState(id) {
@@ -55,9 +55,14 @@ export async function createRealState(body) {
             "content-type": "application/json;charset=utf-8"
         },
         body: JSON.stringify(body)
+    }).catch((e) => {
+        alert('Error en la API')
     })
-    const newRealState = await res.json()
+    if (res) {
+        const newRealState = await res.json()
     return newRealState
+    }
+    return {id: -1}
 }
 
 export async function editRealState(object) {
