@@ -37,9 +37,14 @@ export async function viewRealState(id) {
             "authorization": API_AUTH,
             "content-type": "application/json;charset=utf-8"
         }
+    }).catch((e) => {
+        alert('Error en la API')
     })
-    const realState = await res.json()
-    return realState
+    if (res) {
+        const realState = await res.json()
+        return realState
+    }
+    return {id: -1}
 }
 
 export async function createRealState(body) {
