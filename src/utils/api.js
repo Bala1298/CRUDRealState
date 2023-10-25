@@ -73,7 +73,12 @@ export async function editRealState(object) {
             "content-type": "application/json;charset=utf-8"
         },
         body: JSON.stringify(object)
+    }).catch((e) => {
+        alert('Error en la API')
     })
-    const modificRealState = await res.json()
+    if (res) {
+        const modificRealState = await res.json()
     return modificRealState
+    }
+    return {id: -1}
 }
