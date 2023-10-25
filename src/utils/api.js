@@ -7,9 +7,15 @@ export async function getRealState() {
             "content-type": "application/json;charset=utf-8"
         }
 
+    }).catch((e) => {
     })
-    const _listaRealState = await res.json()
-    return _listaRealState
+    alert('Error en la API')
+    if(res)
+    {
+        const _listaRealState = await res.json()
+        return _listaRealState
+    }
+    return []
 }
 
 export async function deleteRealState(id) {
