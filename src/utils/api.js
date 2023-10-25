@@ -1,4 +1,4 @@
-import { API_AUTH, API_URL } from "./constants"
+import {API_AUTH, API_URL} from "./constants"
 
 export async function getRealState() {
     const res = await fetch(API_URL + "real-estates", {
@@ -6,12 +6,10 @@ export async function getRealState() {
             "authorization": API_AUTH,
             "content-type": "application/json;charset=utf-8"
         }
-
     }).catch((e) => {
+        alert('Error en la API')
     })
-    alert('Error en la API')
-    if(res)
-    {
+    if (res) {
         const _listaRealState = await res.json()
         return _listaRealState
     }
@@ -19,19 +17,22 @@ export async function getRealState() {
 }
 
 export async function deleteRealState(id) {
-        const res = await fetch(API_URL + "real-estates/" + id,  
-        {
-            method: "DELETE",
-            "headers": {
-                "authorization": API_AUTH,
-            }
-        })
+    const res = await fetch(API_URL + "real-estates/" + id, {
+        method: "DELETE",
+        "headers": {
+            "authorization": API_AUTH
+        }
+    }).catch((e) => {
+        alert('Error en la API')
+    })
+    if (res) {
         return true
+    }
+    return false
 }
 
 export async function viewRealState(id) {
-    const res = await fetch(API_URL + "real-estates/" + id,
-    {
+    const res = await fetch(API_URL + "real-estates/" + id, {
         "headers": {
             "authorization": API_AUTH,
             "content-type": "application/json;charset=utf-8"
@@ -42,8 +43,7 @@ export async function viewRealState(id) {
 }
 
 export async function createRealState(body) {
-    const res = await fetch(API_URL + "real-estates", 
-    {
+    const res = await fetch(API_URL + "real-estates", {
         method: "POST",
         "headers": {
             "authorization": API_AUTH,
@@ -56,16 +56,13 @@ export async function createRealState(body) {
 }
 
 export async function editRealState(object) {
-    const res = await fetch(API_URL + "real-estates/",
-    {
+    const res = await fetch(API_URL + "real-estates/", {
         method: "PUT",
         "headers": {
             "authorization": API_AUTH,
             "content-type": "application/json;charset=utf-8"
         },
-        body: JSON.stringify(
-            object
-        )
+        body: JSON.stringify(object)
     })
     const modificRealState = await res.json()
     return modificRealState
