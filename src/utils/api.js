@@ -9,11 +9,14 @@ export async function getRealState() {
     }).catch((e) => {
         alert('Error en la API')
     })
-    if (res) {
+    if (res && res.status === 200) {
         const _listaRealState = await res.json()
         return _listaRealState
     }
-    return undefined
+    if (res.status === 401) {
+        alert('No estas autorizado')
+    }
+    return []
 }
 
 export async function deleteRealState(id) {
